@@ -1,0 +1,32 @@
+
+	<select id="getSelect" parameterClass="java.util.HashMap"
+		resultMap="xaList">
+		select ID, NAME, AGE, CREATE_DATE from XA_TEST where 1=1
+		<dynamic>
+			<!-- <isNotNull prepend=" and" property="ds1_idColRow"> -->
+				<iterate prepend=" and ID in" property="ds.id" open="(" close=")" conjunction=",">
+					<isNotNull property="ds.id[]">
+						#ds.id[]#
+						
+						<iterate prepend=" and ID in" property="ds.id[]" open="(" close=")" conjunction=",">
+						
+						</iterate>
+							
+					</isNotNull>
+					
+					<isNotNull property="ds.id[]">
+						#ds.id[]#
+					</isNotNull>
+					#ds.id#
+					<iterate prepend=" and ID in" property="ds.id[]" open="(" close=")" conjunction=",">
+					
+					</iterate>
+					
+				</iterate>
+				<iterate prepend=" and ID in" property="ds.id[]" open="(" close=")" conjunction=",">
+					
+				</iterate>
+			<!-- </isNotNull> -->
+		</dynamic>
+	</select>
+

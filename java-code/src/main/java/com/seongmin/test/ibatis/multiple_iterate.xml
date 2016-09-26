@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap>
+
+	<typeAlias alias="emp" type="ibatis.emp" />
+
+	<resultMap class="emp" id="empList">
+		<result property="empno" column="EMPNO" />
+		<result property="ename" column="ENAME" />
+		<result property="job" column="JOB" />
+		<result property="sal" column="SAL" />
+	</resultMap>
+
+
+
+	<select id="multiple_iterate" parameterClass="java.util.Map"
+		resultMap="empList">
+		select empno, ename, job ,sal
+			from emp
+			where 1=1
+			<dynamic>
+			
+	     		<iterate prepend=" and sal in" property="salList1" open="(" close=")" conjunction=",">
+	     			
+		     		<iterate property="salList2" close="," conjunction=",">
+		     			#salList2[]#		     		
+					</iterate>	
+					
+					#salList1[]#
+					
+				</iterate>
+	     	
+			</dynamic>
+	</select>
+
+</sqlMap>
+
+

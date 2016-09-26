@@ -1,0 +1,15 @@
+<sqlMap>
+
+	<typeAlias alias="PojoM" type="ibatis.PojoM" />
+	<statement id="forList" parameterClass="PojoM"
+		resultClass="java.lang.String">
+		select count(*) total_count from XA_TEST where 1=1
+		<dynamic>
+			<iterate prepend="ID in" property="PojoM.addressList"
+				open="(" close=")" conjunction=",">
+				#PojoM.addressList[]#
+			</iterate>
+		</dynamic>
+	</statement>
+
+</sqlMap>

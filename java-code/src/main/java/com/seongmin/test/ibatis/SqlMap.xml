@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap>
+
+	<typeAlias alias="xaTest" type="ibatis.XaTest" />
+
+	<resultMap class="xaTest" id="xaList">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="age" column="AGE" />
+		<result property="createDate" column="CREATE_DATE" />
+	</resultMap>
+
+
+
+	<select id="getSelect" parameterClass="java.util.HashMap"
+		resultMap="xaList">
+		select ID, NAME, AGE, CREATE_DATE from XA_TEST where 1=1
+		<dynamic>
+			<!-- <isNotNull prepend=" and" property="ds1_idColRow"> -->
+				<iterate prepend=" and ID in" property="ds1*idColRow" open="(" close=")" conjunction=",">
+					<isNotNull property="ds1*idColRow[]">
+						#ds1*idColRow[]#
+					</isNotNull>
+				</iterate>
+			<!-- </isNotNull> -->
+		</dynamic>
+	</select>
+
+</sqlMap>
+
+
