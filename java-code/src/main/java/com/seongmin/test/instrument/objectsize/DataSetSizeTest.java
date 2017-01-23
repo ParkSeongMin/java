@@ -5,6 +5,9 @@ import com.tobesoft.xplatform.data.datatype.PlatformDataType;
 
 public class DataSetSizeTest {
 	
+	// http://sizeof.sourceforge.net/
+	// bin>java -cp ".;..\lib\xplatform-xapi-1.0.jar;..\lib\commons-logging-api-1.1.jar;..\lib\SizeOf.jar;..\lib\h2-1.3.155.jar" -Xms1G -Xmx1G -javaagent:..\lib\SizeOf.jar DataSetSizeTest
+	
 	public static void main(String[] args) {
 		
 		DataSet dataSet1 = getDataSet("ds1", 1500);
